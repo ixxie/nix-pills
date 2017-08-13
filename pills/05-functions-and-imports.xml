@@ -4,5 +4,134 @@
       version="5.0"
       xml:id="functions-and-imports">
 
-<title>functions and imports</title>
+  <title>functions and imports</title>
+
+  <para>
+    Welcome to the fifth Nix pill. In the previous <link
+    linkend="basics-of-language">fourth</link> pill we touched the Nix
+    language for a moment. We introduced basic types and values of the
+    Nix language, and basic expressions such as <literal>if</literal>,
+    <literal>with</literal> and <literal>let</literal>. I invite you
+    to re-read about these expressions and play with them in the repl.
+  </para>
+  <para>
+    Functions help to build reusable components in a big repository
+    like <link
+    xlink:href="https://github.com/NixOS/nixpkgs/">nixpkgs</link>. The
+    Nix manual has a <link
+    xlink:href="https://nixos.org/nix/manual/#ss-functions">great
+    explanation of functions</link>. Let's go: pill on one hand, Nix
+    manual on the other hand.
+  </para>
+  <para>
+    I remind you how to enter the Nix environment: <command>source
+    ~/.nix-profile/etc/profile.d/nix.sh</command>
+  </para>
+
+  <section>
+    <title>Nameless and single parameter</title>
+
+    <para>
+       Functions are anonymous (lambdas), and only have a single
+       parameter. The syntax is extremely simple. Type the parameter
+       name, then "<literal>:</literal>", then the body of the
+       function.
+    </para>
+
+    <screen><xi:include href="./05/nix-repl-fn-example.txt"
+    parse="text" /></screen>
+
+    <para>
+      So here we defined a function that takes a parameter
+      <parameter>x</parameter>, and returns <literal>x * 2</literal>.
+      The problem is that we cannot use it in any way,  because it's
+      unnamed... joke!
+    </para>
+
+    <para>
+      We can store functions in variables.
+    </para>
+
+    <screen><xi:include href="./05/nix-repl-named-fn.txt"
+    parse="text" /></screen>
+
+    <para>
+       As usual, please ignore the special syntax for assignments
+       inside nix-repl.
+    </para>
+    <para>
+       So, we defined a function <code>x: x*2</code> that takes one
+       parameter <parameter>x</parameter>, and returns <literal>x *
+       2</literal>. This function is then assigned to the variable
+       <varname>double</varname>.
+    </para>
+    <para>
+      Finally we did our first function call: <code>double 3</code>.
+    </para>
+    <note><para>
+      It's not like many other programming languages where you write
+       <code>double(3)</code>. It really is <code>double 3</code>.
+    </para></note>
+    <para>
+      In summary: to call a function, name the variable, then space,
+      then the argument. Nothing else to say, it's as easy as that.
+    </para>
+  </section>
+
+  <section>
+    <title> More than one parameter</title>
+
+    <para>
+      How do we create a function that accepts more than one
+      parameter? For people not used to functional programming, this
+      may take a while to grasp. Let's do it step by step.
+    </para>
+
+    <screen><xi:include href="./05/multi-param-fn.txt"
+    parse="text" /></screen>
+    <para>
+      We defined a function that takes the parameter
+      <parameter>a</parameter>, the body returns another function.
+      This other function takes a parameter <parameter>b</parameter>
+      and returns <code>a*b</code>.
+    </para>
+    <para>
+     Therefore, calling <code>mul 3</code> returns this kind of
+     function: <code>b: 3*b</code>. In turn, we call the returned
+     function with <parameter>4</parameter>, and get the expected
+     result.
+    </para>
+    <para>
+      You don't have to use parenthesis at all, Nix has sane priorities when parsing the code:
+    </para>
+  </section>
+
+  <section>
+    <title>Arguments set</title>
+
+    <para>
+    </para>
+  </section>
+
+  <section>
+    <title>Default and variadic attributes</title>
+
+    <para>
+    </para>
+  </section>
+
+  <section>
+    <title>Imports</title>
+
+    <para>
+    </para>
+  </section>
+
+  <section>
+    <title>Next pill</title>
+
+    <para>
+    </para>
+  </section>
+
 </chapter>
